@@ -15,8 +15,7 @@ class NewDeck extends React.Component {
             title: this.state.title
         };
         this.props.dispatch(actions.postDeck(deck));
-        //this.props.navigation.goBack();
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     }
 
     render() {

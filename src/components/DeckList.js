@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
+import {FontAwesome} from '@expo/vector-icons';
 import DeckTitle from './DeckTitle';
 
 class DeckList extends React.Component {
@@ -10,32 +10,34 @@ class DeckList extends React.Component {
         this.props.navigation.navigate('NewDeck');
     }
 
-    render () {
+    render() {
         let decks = [];
-        for (var i=0; i < this.props.decks.length; i++) {
-            decks.push(<DeckTitle deck = {this.props.decks[i]} />)
+        for (var i = 0; i < this.props.decks.length; i++) {
+            decks.push(<DeckTitle count={i} deck={this.props.decks[i]}/>)
         }
         return (
-            <View style={styles.container}>
-                {decks}
-                <TouchableOpacity onPress={this.handlePress} style={styles.deckTitle}>
-                    <Text style={styles.addDeckButton}><FontAwesome name='plus' size={18} /> Create Deck</Text>
-                </TouchableOpacity>
+            // Try setting `justifyContent` to `center`.
+            // Try setting `flexDirection` to `row`.
+            <View style={{flex: 1}}>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                }}>
+                    {decks}
+                </View>
+                <View style={{alignItems: 'center'}}>
+                    <TouchableOpacity onPress={this.handlePress}>
+                        <Text style={styles.addDeckButton}><FontAwesome name='plus' size={18}/> Create Deck</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    deckTitle: {
-
-    },
+    deckTitles: {},
     addDeckButton: {
         backgroundColor: '#32CD32',
         alignItem: 'center',
@@ -44,7 +46,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
+        width: 150
     }
 });
 
