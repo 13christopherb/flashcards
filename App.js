@@ -1,27 +1,30 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import DeckList from "./components/DeckList";
-import Deck from './components/Deck'
+import {StyleSheet} from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import { createStore , applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import DeckList from "./src/components/DeckList";
+import NewDeck from './src/components/NewDeck';
+import Deck from './src/components/Deck';
+import reducer from './src/reducers/reducers';
 
+const store = createStore(
+    reducer,
+    applyMiddleware(thunk)
+)
 
 export default class App extends React.Component {
 
     render() {
         return (
-            <Stack />
+            <Provider store={store}>
+                <Stack />
+            </Provider>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 const Stack = StackNavigator({
     Home: {
@@ -29,5 +32,8 @@ const Stack = StackNavigator({
     },
     Deck: {
         screen: Deck
+    },
+    NewDeck: {
+        screen: NewDeck
     }
 })
