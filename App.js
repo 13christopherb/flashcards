@@ -1,16 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import DeckList from "./components/DeckList";
+import Deck from './components/Deck'
+import { StackNavigator } from 'react-navigation';
+
 
 export default class App extends React.Component {
 
-    handlePress = (e) => {
-        alert('hello');
-    }
-
     render() {
         return (
-            <DeckList/>
+            <Stack />
         );
     }
 }
@@ -23,3 +22,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+const Stack = StackNavigator({
+    Home: {
+        screen: DeckList
+    },
+    Deck: {
+        screen: Deck
+    }
+})
