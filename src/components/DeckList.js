@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native'
 import {connect} from 'react-redux';
 import {FontAwesome} from '@expo/vector-icons';
 import DeckTitle from './DeckTitle';
+import TextButton from './TextButton';
 
 class DeckList extends React.Component {
 
@@ -19,12 +20,10 @@ class DeckList extends React.Component {
         for (var i = 0; i < this.props.decks.length; i++) {
             decks.push(<DeckTitle count={i}
                                   deck={this.props.decks[i]}
-                                  selectDeck={this.selectDeck}
-            />)
+                                  selectDeck={this.selectDeck}/>
+            )
         }
         return (
-            // Try setting `justifyContent` to `center`.
-            // Try setting `flexDirection` to `row`.
             <View style={{flex: 1}}>
                 <View style={{
                     flex: 1,
@@ -34,9 +33,9 @@ class DeckList extends React.Component {
                     {decks}
                 </View>
                 <View style={{alignItems: 'center'}}>
-                    <TouchableOpacity onPress={this.handlePress}>
-                        <Text style={styles.addDeckButton}><FontAwesome name='plus' size={18}/> Create Deck</Text>
-                    </TouchableOpacity>
+                    <TextButton onPress={this.handlePress} style={styles.addDeckButton}>
+                        <FontAwesome name='plus' size={18}/> Create Deck
+                    </TextButton>
                 </View>
             </View>
         );
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#32CD32',
         alignItem: 'center',
         fontSize: '20',
+        borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
         paddingRight: 10,

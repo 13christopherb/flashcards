@@ -1,30 +1,27 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
-import * as actions from '../actions/actions';
+import {FontAwesome} from '@expo/vector-icons';
 import uuidv4 from 'uuid';
+import * as actions from '../actions/actions';
 import TextButton from './TextButton';
 
-class NewDeck extends React.Component {
+class NewCard extends React.Component {
 
     state = {
-        title: ''
+        question: '',
+        answer: ''
     }
 
     handleSubmit = (e) => {
-        const deck = {
+        const card = {
             id: uuidv4(),
-            title: this.state.title
+            deckId: this.props.navigation.state.params.deckId,
+            question: this.state.question,
+            answer: this.state.answer
         };
-        if (this.validateInputs()) {
-            this.props.dispatch(actions.postDeck(deck));
-            this.props.navigation.goBack();
-        }
-    }
-
-    validateInputs = () => {
-        return (this.state.title.length > 0 && this.state.title.length < 20)
+        this.props.dispatch(actions.postCard(card));
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -32,8 +29,13 @@ class NewDeck extends React.Component {
             <View style={styles.container}>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(title) => this.setState({title})}
-                    value={this.state.title}
+                    onChangeText={(question) => this.setState({question})}
+                    value={this.state.question}
+                />
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(answer) => this.setState({answer})}
+                    value={this.state.answer}
                 />
                 <TextButton onPress={this.handleSubmit} style={styles.addDeckButton}>
                     <FontAwesome name='plus' size={18}/> Create Deck
@@ -42,6 +44,7 @@ class NewDeck extends React.Component {
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -64,4 +67,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(NewDeck)
+export default connect()(NewCard)

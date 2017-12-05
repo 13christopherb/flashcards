@@ -13,9 +13,23 @@ function decks(state=initialState, action) {
             return {
                 ...state,
                 ['decks']: decks
-            }
+            };
         default:
-            return state
+            return state;
+    }
+}
+
+function cards(state=initialState, action) {
+    switch (action.type) {
+        case actions.addCard:
+            var cards = [...state['cards']];
+            cards.push(action.card);
+            return {
+                ...state,
+                ['cards']: cards
+            };
+        default:
+            return state;
     }
 }
 
