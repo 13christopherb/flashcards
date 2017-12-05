@@ -2,26 +2,33 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
 import {FontAwesome} from '@expo/vector-icons';
+import * as actions from '../actions/actions';
 import DeckTitle from './DeckTitle';
 import TextButton from './TextButton';
 
 class DeckList extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(actions.fetchDecks());
+    }
 
     handlePress = (e) => {
         this.props.navigation.navigate('NewDeck');
     }
 
     selectDeck = (deck) => {
-        this.props.navigation.navigate('Deck', {title: deck.title})
+        this.props.navigation.navigate('Deck', {id: deck.id})
     }
 
     render() {
         let decks = [];
-        for (var i = 0; i < this.props.decks.length; i++) {
-            decks.push(<DeckTitle count={i}
-                                  deck={this.props.decks[i]}
-                                  selectDeck={this.selectDeck}/>
-            )
+        if (this.props.decks) {
+            for (var i = 0; i < this.props.decks.length; i++) {
+                decks.push(<DeckTitle count={i}
+                                      deck={this.props.decks[i]}
+                                      selectDeck={this.selectDeck}/>
+                )
+            }
         }
         return (
             <View style={{flex: 1}}>

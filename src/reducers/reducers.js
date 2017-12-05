@@ -3,6 +3,7 @@ import * as actions from '../actions/actions';
 
 const initialState = {
     decks: [],
+    cards: []
 }
 
 function decks(state=initialState, action) {
@@ -14,6 +15,11 @@ function decks(state=initialState, action) {
                 ...state,
                 ['decks']: decks
             };
+        case actions.GET_DECKS:
+            return {
+                ...state,
+                ['decks']: action.decks
+            }
         default:
             return state;
     }
@@ -21,18 +27,24 @@ function decks(state=initialState, action) {
 
 function cards(state=initialState, action) {
     switch (action.type) {
-        case actions.addCard:
+        case actions.ADD_CARD:
             var cards = [...state['cards']];
             cards.push(action.card);
             return {
                 ...state,
                 ['cards']: cards
             };
+        case actions.GET_CARDS:
+            return {
+                ...state,
+                ['cards']: action.cards
+            }
         default:
             return state;
     }
 }
 
 export default combineReducers({
+    cards,
     decks
 });

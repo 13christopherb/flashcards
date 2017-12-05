@@ -5,11 +5,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import _ from 'underscore';
 import * as actions from '../actions/actions';
 import TextButton from './TextButton';
+import Card from './Card'
 
 class Deck extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(actions.fetchDeck(this.props.title));
+        this.props.dispatch(actions.fetchDeck(this.props.id));
+        this.props.dispatch(actions.fetchCards(this.props.id));
     }
 
     handlePress = () => {
@@ -17,9 +19,18 @@ class Deck extends React.Component {
     }
 
     render() {
+        let cards = [];
+        if (this.props.cards) {
+
+        for (let i = 0; i < this.props.cards.length; i++) {
+            cards.push(<Card id={this.props.cards[i].id}/>);
+        }
+    }
+
         return (
             <View>
                 <Text>{this.props.deck.title}</Text>
+                {cards}
                 <TextButton onPress={this.handlePress} style={styles.addCardButton}>
                     <FontAwesome name='plus' size={18}/>
                 </TextButton>
@@ -28,13 +39,14 @@ class Deck extends React.Component {
     }
 }
 
-function mapStateToProps({decks}, ownProps) {
-    const title = ownProps.navigation.state.params.title;
+function mapStateToProps({decks, cards}, ownProps) {
+    const id = ownProps.navigation.state.params.id;
     return {
-        title: title,
+        id: id,
         deck: _.filter(decks.decks, (deck) => {
-            return title === deck.title;
-        })[0]
+            return id === deck.id;
+        })[0],
+        cards: cards.cards
     }
 }
 
