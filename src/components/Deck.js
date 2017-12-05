@@ -1,15 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
+import {connect} from 'react-redux';
+import _ from 'underscore';
+import * as actions from '../actions/actions';
 
 class Deck extends React.Component {
 
-    render () {
+    componentDidMount() {
+        this.props.dispatch(actions.fetchDeck(this.props.title));
+    }
+
+    render() {
         return (
             <View>
-                <Text>Hello</Text>
+                <Text>{this.props.deck.title}</Text>
             </View>
         );
     }
 }
 
-export default Deck;
+function mapStateToProps({decks}, ownProps) {
+    const title = ownProps.navigation.state.params.title;
+    return {
+        title: title,
+        deck: _.filter(decks.decks, (deck) => {
+            return title === deck.title;
+        })[0]
+    }
+}
+
+export default connect(
+    mapStateToProps,
+)(Deck)

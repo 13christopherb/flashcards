@@ -10,10 +10,17 @@ class DeckList extends React.Component {
         this.props.navigation.navigate('NewDeck');
     }
 
+    selectDeck = (deck) => {
+        this.props.navigation.navigate('Deck', {title: deck.title})
+    }
+
     render() {
         let decks = [];
         for (var i = 0; i < this.props.decks.length; i++) {
-            decks.push(<DeckTitle count={i} deck={this.props.decks[i]}/>)
+            decks.push(<DeckTitle count={i}
+                                  deck={this.props.decks[i]}
+                                  selectDeck={this.selectDeck}
+            />)
         }
         return (
             // Try setting `justifyContent` to `center`.
@@ -37,7 +44,6 @@ class DeckList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    deckTitles: {},
     addDeckButton: {
         backgroundColor: '#32CD32',
         alignItem: 'center',
