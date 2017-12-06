@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import {connect} from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
+import {FontAwesome} from '@expo/vector-icons';
 import _ from 'underscore';
 import * as actions from '../actions/actions';
 import TextButton from './TextButton';
@@ -9,33 +9,58 @@ import Card from './Card'
 
 class Deck extends React.Component {
 
+    state = {
+        cardIndex: 0,
+        quizzing: false,
+        score: 0,
+    }
+
     componentDidMount() {
         this.props.dispatch(actions.fetchDeck(this.props.id));
         this.props.dispatch(actions.fetchCards(this.props.id));
     }
 
-    handlePress = () => {
+    handleCreateCard = () => {
         this.props.navigation.navigate('NewCard', {deckId: this.props.deck.id})
     }
 
-    render() {
-        let cards = [];
-        if (this.props.cards) {
-
-        for (let i = 0; i < this.props.cards.length; i++) {
-            cards.push(<Card id={this.props.cards[i].id}/>);
+    handleAnswer = (isCorrect) => {
+        let delScore = isCorrect ? 1 : 0;
+        let cardIndex = this.state.cardIndex;
+        if (cardIndex < this.props.cards.length - 1) {
+            cardIndex++;
+            this.setState({
+                score: this.state.score + delScore,
+                cardIndex: cardIndex
+            });
+        } else {
+            this.props.navigation.navigate('Result', {score: this.state.score, title: this.props.deck.title})
         }
     }
 
-        return (
-            <View>
+    startQuiz = () => {
+        this.setState({
+            card: this.props.cards[0],
+            quizzing: true
+        })
+    }
+
+    render() {
+        let card = this.props.cards[this.state.cardIndex];
+        let cardComponent = card && <Card id={card.id} handleAnswer={this.handleAnswer} score={this.state.score}/>;
+        return !this.state.quizzing ?
+            <View style={styles.container}>
                 <Text>{this.props.deck.title}</Text>
-                {cards}
-                <TextButton onPress={this.handlePress} style={styles.addCardButton}>
+                <TextButton onPress={this.handleCreateCard} style={styles.addCardButton}>
                     <FontAwesome name='plus' size={18}/>
                 </TextButton>
+                <TextButton onPress={this.startQuiz} style={styles.addCardButton}>
+                    Start quiz
+                </TextButton>
             </View>
-        );
+            : <View style={styles.container}>
+                {cardComponent}
+            </View>
     }
 }
 
@@ -46,17 +71,22 @@ function mapStateToProps({decks, cards}, ownProps) {
         deck: _.filter(decks.decks, (deck) => {
             return id === deck.id;
         })[0],
-        cards: cards.cards
+        cards: _.shuffle(cards.cards)
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     addCardButton: {
         backgroundColor: '#32CD32',
         fontSize: '20',
         color: '#ffffff',
         borderRadius: 7,
-        width: 20
+        width: 140
     },
 
 });

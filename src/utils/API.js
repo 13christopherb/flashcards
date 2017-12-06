@@ -68,13 +68,10 @@ export async function fetchCards(deckId) {
     try {
         let response = await AsyncStorage.getItem(CARD_STORAGE_KEY);
         response = JSON.parse(response);
-        let cards = Object.keys(response).map(key => {
-            return response[key]
+        let cards = response[deckId];
+        return Object.keys(cards).map(key => {
+            return cards[key]
         });
-        cards = _.filter(cards, card => {
-            return card.deckId === deckId;
-        });
-        return cards;
     } catch (e) {
         //Handle error
     }

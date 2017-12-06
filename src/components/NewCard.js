@@ -37,8 +37,8 @@ class NewCard extends React.Component {
                     onChangeText={(answer) => this.setState({answer})}
                     value={this.state.answer}
                 />
-                <TextButton onPress={this.handleSubmit} style={styles.addDeckButton}>
-                    <FontAwesome name='plus' size={18}/> Create Deck
+                <TextButton onPress={this.handleSubmit} style={styles.addCardButton}>
+                    <FontAwesome name='plus' size={18}/> Create Card
                 </TextButton>
             </View>
         );
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    addDeckButton: {
+    addCardButton: {
         height: 35,
         backgroundColor: '#32CD32',
         alignItem: 'center',

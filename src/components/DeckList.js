@@ -8,12 +8,31 @@ import TextButton from './TextButton';
 
 class DeckList extends React.Component {
 
+    state = {
+        editing: false
+    }
+
     componentDidMount() {
         this.props.dispatch(actions.fetchDecks());
     }
 
-    handlePress = (e) => {
+    createDeck = (e) => {
         this.props.navigation.navigate('NewDeck');
+    }
+
+    deleteDeck = (deck) => {
+        this.props.dispatch(actions.deleteDeck(deck));
+        this.setState({
+            editing: false
+        })
+    }
+
+    toggleEdit = (e) => {
+        if (this.props.decks.length > 0) {
+            this.setState({
+                editing: !this.state.editing
+            })
+        }
     }
 
     selectDeck = (deck) => {
@@ -26,12 +45,27 @@ class DeckList extends React.Component {
             for (var i = 0; i < this.props.decks.length; i++) {
                 decks.push(<DeckTitle count={i}
                                       deck={this.props.decks[i]}
+                                      deleteDeck={this.deleteDeck}
+                                      editing={this.state.editing}
                                       selectDeck={this.selectDeck}/>
                 )
             }
         }
         return (
             <View style={{flex: 1}}>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                }}>
+                    <TextButton onPress={this.toggleEdit} style={styles.editButton}>
+                        Edit
+                    </TextButton>
+                    {this.state.editing &&
+                    <TextButton onPress={this.toggleEdit} style={styles.editButton}>
+                        Cancel
+                    </TextButton>
+                    }
+                </View>
                 <View style={{
                     flex: 1,
                     flexDirection: 'column',
@@ -40,7 +74,7 @@ class DeckList extends React.Component {
                     {decks}
                 </View>
                 <View style={{alignItems: 'center'}}>
-                    <TextButton onPress={this.handlePress} style={styles.addDeckButton}>
+                    <TextButton onPress={this.createDeck} style={styles.addDeckButton}>
                         <FontAwesome name='plus' size={18}/> Create Deck
                     </TextButton>
                 </View>
@@ -61,6 +95,12 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 5,
         width: 150
+    },
+    editButton: {
+        alignItem: 'center',
+        fontSize: '20',
+        borderRadius: 5,
+        color: '#4169E1',
     }
 });
 
