@@ -5,9 +5,13 @@ const DECK_STORAGE_KEY = 'Flashcards:decks'
 const CARD_STORAGE_KEY = 'Flashcards:cards'
 
 export function addDeck(deck) {
-    let wrappedDeck = {};
-    wrappedDeck[deck.id] = deck;
-    return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(wrappedDeck));
+    try {
+        let wrappedDeck = {};
+        wrappedDeck[deck.id] = deck;
+        return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(wrappedDeck));
+    } catch (e) {
+        //Handle error
+    }
 }
 
 export async function fetchDeck(id) {
@@ -23,10 +27,10 @@ export async function fetchDeck(id) {
 
 export async function fetchDecks() {
     try {
-        let result = await AsyncStorage.getItem(DECK_STORAGE_KEY);
-        result = JSON.parse(result);
-        let decks = Object.keys(result).map(key => {
-            return result[key];
+        let response = await AsyncStorage.getItem(DECK_STORAGE_KEY);
+        response = JSON.parse(response);
+        let decks = Object.keys(response).map(key => {
+            return response[key];
         })
         return decks;
     } catch (e) {
@@ -34,22 +38,58 @@ export async function fetchDecks() {
     }
 }
 
+export async function deleteDeck(id) {
+    try {
+        let response = await AsyncStorage.getItem(DECK_STORAGE_KEY);
+        let decks = JSON.parse(response);
+        decks[id] = undefined;
+        delete decks[id];
+        response = await AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
+        return response;
+    } catch (e) {
+        //Handle error
+    }
+}
+
 export function addCard(card) {
-    let wrapper = {};
-    wrapper[card.Id] = card;
-    let wrappedCard = {};
-    wrappedCard[card.deckId] = {wrapper};
-    return AsyncStorage.mergeItem(CARD_STORAGE_KEY, JSON.stringify(wrappedCard));
+    try {
+        let wrapper = {};
+        wrapper[card.id] = card;
+        let wrappedCard = {};
+        wrappedCard[card.deckId] = wrapper;
+        return AsyncStorage.mergeItem(CARD_STORAGE_KEY, JSON.stringify(wrappedCard));
+    } catch (e) {
+        //Handle error
+    }
+
 }
 
 export async function fetchCards(deckId) {
-    let cards = [];
     try {
         let response = await AsyncStorage.getItem(CARD_STORAGE_KEY);
         response = JSON.parse(response);
-        cards = response[deckId];
+        let cards = Object.keys(response).map(key => {
+            return response[key]
+        });
+        cards = _.filter(cards, card => {
+            return card.deckId === deckId;
+        });
         return cards;
     } catch (e) {
+        //Handle error
+    }
+}
+
+export async function deleteCards(deckId) {
+    try {
+        let response = await AsyncStorage.getItem(CARD_STORAGE_KEY);
+        let cards = JSON.parse(response);
+        cards[deckId] = undefined;
+        delete cards[deckId];
+        response = await AsyncStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(cards));
+        return response;
+    }
+    catch (e) {
         //Handle error
     }
 }
