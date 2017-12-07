@@ -34,7 +34,13 @@ class Deck extends React.Component {
                 cardIndex: cardIndex
             });
         } else {
-            this.props.navigation.navigate('Result', {score: this.state.score, title: this.props.deck.title})
+            this.setState({
+                score: 0,
+                cardIndex: 0,
+                quizzing: false
+            })
+            this.props.navigation.navigate('Result', {score: this.state.score, title: this.props.deck.title,
+                parentScreenKey: this.props.navigation.state.key})
         }
     }
 
@@ -54,9 +60,11 @@ class Deck extends React.Component {
                 <TextButton onPress={this.handleCreateCard} style={styles.addCardButton}>
                     <FontAwesome name='plus' size={18}/>
                 </TextButton>
-                <TextButton onPress={this.startQuiz} style={styles.addCardButton}>
-                    Start quiz
-                </TextButton>
+                {this.props.cards.length > 0 &&
+                    <TextButton onPress={this.startQuiz} style={styles.addCardButton}>
+                        Start quiz
+                    </TextButton>
+                }
             </View>
             : <View style={styles.container}>
                 {cardComponent}
