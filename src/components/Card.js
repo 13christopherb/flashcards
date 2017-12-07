@@ -34,14 +34,20 @@ class Card extends React.Component {
 
     render() {
         return !this.state.showAnswer ?
-            <View style={styles.container}>
+            <View>
                 <Text>{this.props.card.question}</Text>
                 <TextButton onPress={this.showAnswer}>Show answer</TextButton>
             </View> :
-            <View style={styles.container}>
+            <View>
                 <Text>{this.props.card.answer}</Text>
-                <TextButton onPress={this.handleCorrect}>Correct</TextButton>
-                <TextButton onPress={this.handleIncorrect}>Incorrect</TextButton>
+                <View style={styles.resultButtons}>
+                    <TextButton onPress={this.handleCorrect} style={styles.correctButton}>
+                        <FontAwesome name='check' size={18}/>  Correct
+                    </TextButton>
+                    <TextButton onPress={this.handleIncorrect} style={styles.incorrectButton}>
+                        <FontAwesome name='times' size={18}/>  Incorrect
+                    </TextButton>
+                </View>
             </View>
 
     }
@@ -63,6 +69,35 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    correctButton: {
+        backgroundColor: '#32CD32',
+        alignItem: 'center',
+        fontSize: '20',
+        borderRadius: 5,
+        color: '#ffffff',
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        width: 130
+    },
+    incorrectButton: {
+        backgroundColor: '#e60000',
+        alignItem: 'center',
+        fontSize: '20',
+        borderRadius: 5,
+        color: '#ffffff',
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        width: 130
+    },
+    resultButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    }
 });
 
 export default connect(

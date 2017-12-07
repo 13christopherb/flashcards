@@ -25,13 +25,13 @@ class Deck extends React.Component {
     }
 
     handleAnswer = (isCorrect) => {
-        let delScore = isCorrect ? 1 : 0;
+        let score = isCorrect ? this.state.score+1 : this.state.score;
         let cardIndex = this.state.cardIndex;
         if (cardIndex < this.props.cards.length - 1) {
             cardIndex++;
             this.setState({
-                score: this.state.score + delScore,
-                cardIndex: cardIndex
+                cardIndex: cardIndex,
+                score: score
             });
         } else {
             this.setState({
@@ -39,7 +39,7 @@ class Deck extends React.Component {
                 cardIndex: 0,
                 quizzing: false
             })
-            this.props.navigation.navigate('Result', {score: this.state.score, title: this.props.deck.title,
+            this.props.navigation.navigate('Result', {score: score, title: this.props.deck.title,
                 parentScreenKey: this.props.navigation.state.key})
         }
     }
@@ -66,7 +66,7 @@ class Deck extends React.Component {
                     </TextButton>
                 }
             </View>
-            : <View style={styles.container}>
+            : <View>
                 {cardComponent}
             </View>
     }
