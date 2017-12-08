@@ -1,5 +1,4 @@
 import {AsyncStorage} from 'react-native';
-import _ from 'underscore';
 
 const DECK_STORAGE_KEY = 'Flashcards:decks'
 const CARD_STORAGE_KEY = 'Flashcards:cards'

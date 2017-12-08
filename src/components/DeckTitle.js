@@ -3,35 +3,45 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
 
 
-export default function DeckTitle(props) {
+class DeckTitle extends React.Component {
 
-    const handlePress = function() {
-        props.selectDeck(props.deck);
+    state={
+        editing: false
     }
 
-    const handleDelete = function() {
-        props.deleteDeck(props.deck);
+
+    handlePress =() => {
+        this.props.selectDeck(this.props.deck);
     }
 
-    const containerStyle = props.count % 2 === 0 ?
-        styles.containerGrey : styles.containerWhite  //Alternate colors
+    handleDelete = () => {
+        this.props.deleteDeck(this.props.deck);
+    }
 
-    return (
-        <View style={containerStyle}>
-            {props.editing &&
-            <TouchableOpacity onPress={handleDelete}>
-                <FontAwesome color='#e60000' name='times' size={25}/>
-            </TouchableOpacity>}
-            <TouchableOpacity style={{flex: 1}} onPress={handlePress}>
-                <View style={styles.titleButton}>
-                    <MaterialCommunityIcons name='cards-outline' size={40}/>
-                    <Text style={{fontSize: 30}}>{props.deck.title}</Text>
-                    <FontAwesome name='chevron-right' size={35}/>
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
+    render() {
+        const containerStyle = this.props.count % 2 === 0 ?
+            styles.containerGrey : styles.containerWhite  //Alternate colors
+
+
+        return (
+            <View style={containerStyle}>
+                {this.props.editing &&
+                <TouchableOpacity onPress={this.handleDelete}>
+                    <FontAwesome color='#e60000' name='times' size={25}/>
+                </TouchableOpacity>}
+                <TouchableOpacity style={{flex: 1}} onPress={this.handlePress}>
+                    <View style={styles.titleButton}>
+                        <MaterialCommunityIcons name='cards-outline' size={40}/>
+                        <Text style={{fontSize: 30}}>{this.props.deck.title}</Text>
+                        <FontAwesome name='chevron-right' size={35}/>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
+
+export default DeckTitle;
 
 const styles = StyleSheet.create({
     containerGrey: {
