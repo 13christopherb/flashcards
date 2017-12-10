@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'center',
     },
     startQuizButton: {
         backgroundColor: '#6f7fcd',

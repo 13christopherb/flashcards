@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
         width: 150
     },
     editButton: {
-        alignItem: 'center',
         fontSize: 20,
         borderRadius: 5,
         color: '#4169E1',

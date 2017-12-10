@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
         width: 300,
         height: 500,
         backgroundColor: 'powderblue',
-        alignItems: 'center',
         justifyContent: 'space-around'
     },
     showAnswerButton: {
