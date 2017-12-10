@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     addDeckButton: {
         height: 35,
         backgroundColor: '#32CD32',
-        alignItem: 'center',
         borderRadius: 5,
         fontSize: 20,
         color: '#ffffff',

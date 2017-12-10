@@ -86,7 +86,6 @@ class DeckList extends React.Component {
 const styles = StyleSheet.create({
     addDeckButton: {
         backgroundColor: '#32CD32',
-        alignItem: 'center',
         fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',

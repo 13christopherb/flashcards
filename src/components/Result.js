@@ -28,7 +28,6 @@ export default function Result(props) {
 const styles = StyleSheet.create({
     finishedButton: {
         backgroundColor: '#32CD32',
-        alignItem: 'center',
         fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     },
     retryButton: {
         backgroundColor: '#6f7fcd',
-        alignItem: 'center',
         fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',

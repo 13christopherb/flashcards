@@ -58,7 +58,6 @@ export default Swipeout;
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#6f7fcd',
-        alignItem: 'center',
         fontSize: '20',
         borderRadius: 5,
         color: '#ffffff',

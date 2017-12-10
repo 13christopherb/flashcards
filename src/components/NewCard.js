@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     addCardButton: {
         height: 35,
         backgroundColor: '#32CD32',
-        alignItem: 'center',
         borderRadius: 5,
         fontSize: 20,
         color: '#ffffff',
