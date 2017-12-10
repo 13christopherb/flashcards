@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     addDeckButton: {
         backgroundColor: '#32CD32',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     editButton: {
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#4169E1',
     }

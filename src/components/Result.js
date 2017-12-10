@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     finishedButton: {
         backgroundColor: '#32CD32',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     retryButton: {
         backgroundColor: '#6f7fcd',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,

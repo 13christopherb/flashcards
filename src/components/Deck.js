@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     startQuizButton: {
         backgroundColor: '#6f7fcd',
-        fontSize: '20',
+        fontSize: 20,
         color: '#ffffff',
         borderRadius: 7,
         width: 140,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     },
     addCardButton: {
         backgroundColor: '#32CD32',
-        fontSize: '20',
+        fontSize: 20,
         color: '#ffffff',
         borderRadius: 7,
         width: 140,

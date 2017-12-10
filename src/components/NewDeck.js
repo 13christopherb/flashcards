@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#32CD32',
         alignItem: 'center',
         borderRadius: 5,
-        fontSize: '20',
+        fontSize: 20,
         color: '#ffffff',
         paddingLeft: 10,
         paddingRight: 10,

@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     showAnswerButton: {
         backgroundColor: '#6f7fcd',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     correctButton: {
         backgroundColor: '#32CD32',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     incorrectButton: {
         backgroundColor: '#e60000',
         alignItem: 'center',
-        fontSize: '20',
+        fontSize: 20,
         borderRadius: 5,
         color: '#ffffff',
         paddingLeft: 10,
