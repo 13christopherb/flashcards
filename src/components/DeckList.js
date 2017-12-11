@@ -44,7 +44,7 @@ class DeckList extends React.Component {
         if (this.props.decks) {
             for (var i = 0; i < this.props.decks.length; i++) {
                 decks.push(<DeckTitle count={i}
-                                      deck={this.props.decks[i]}
+                                     deck={this.props.decks[i]}
                                       deleteDeck={this.deleteDeck}
                                       editing={this.state.editing}
                                       selectDeck={this.selectDeck}/>

@@ -8,12 +8,13 @@ export const ADD_CARD = 'ADD_CARD';
 export const GET_CARDS = 'GET_CARDS';
 export const REMOVE_CARDS = 'REMOVE_CARDS';
 
-export function addDeck({id, title }) {
+export function addDeck({id, title, cards }) {
     return {
         type: ADD_DECK,
         deck: {
             id,
-            title
+            title,
+            cards
         }
     }
 }

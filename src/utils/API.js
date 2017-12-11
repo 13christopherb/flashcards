@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native';
+import _ from 'underscore';
 
 const DECK_STORAGE_KEY = 'Flashcards:decks'
-const CARD_STORAGE_KEY = 'Flashcards:cards'
 
 export function addDeck(deck) {
     try {
@@ -50,13 +50,13 @@ export async function deleteDeck(id) {
     }
 }
 
-export function addCard(card) {
+export async function addCard(card) {
     try {
+        let deck = await fetchDeck(card.deckId);
+        deck['cards'].push(card);
         let wrapper = {};
-        wrapper[card.id] = card;
-        let wrappedCard = {};
-        wrappedCard[card.deckId] = wrapper;
-        return AsyncStorage.mergeItem(CARD_STORAGE_KEY, JSON.stringify(wrappedCard));
+        wrapper[card.deckId] = deck;
+        return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(wrapper));
     } catch (e) {
         //Handle error
     }
@@ -65,9 +65,9 @@ export function addCard(card) {
 
 export async function fetchCards(deckId) {
     try {
-        let response = await AsyncStorage.getItem(CARD_STORAGE_KEY);
+        let response = await AsyncStorage.getItem(DECK_STORAGE_KEY);
         response = JSON.parse(response);
-        let cards = response[deckId];
+        let cards = response[deckId]['cards'];
         return Object.keys(cards).map(key => {
             return cards[key]
         });
@@ -76,13 +76,14 @@ export async function fetchCards(deckId) {
     }
 }
 
-export async function deleteCards(deckId) {
+export async function deleteCards(card) {
     try {
-        let response = await AsyncStorage.getItem(CARD_STORAGE_KEY);
-        let cards = JSON.parse(response);
-        cards[deckId] = undefined;
-        delete cards[deckId];
-        response = await AsyncStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(cards));
+        let response = await fetchDeck(card.deckId);
+        let deck = JSON.parse(response);
+        deck['cards'] = _.reject(deck['cards'], (c) => {
+            return card.id === c.id;
+        });
+        response = await AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deck));
         return response;
     }
     catch (e) {

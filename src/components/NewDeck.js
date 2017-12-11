@@ -15,7 +15,8 @@ class NewDeck extends React.Component {
     handleSubmit = (e) => {
         const deck = {
             id: uuidv4(),
-            title: this.state.title
+            title: this.state.title,
+            cards: []
         };
         if (this.validateInputs()) {
             this.props.dispatch(actions.postDeck(deck));

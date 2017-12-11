@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
+import _ from 'underscore';
 
 
 class DeckTitle extends React.Component {
@@ -8,7 +9,6 @@ class DeckTitle extends React.Component {
     state={
         editing: false
     }
-
 
     handlePress =() => {
         this.props.selectDeck(this.props.deck);
@@ -22,7 +22,7 @@ class DeckTitle extends React.Component {
         const containerStyle = this.props.count % 2 === 0 ?
             styles.containerGrey : styles.containerWhite  //Alternate colors
 
-
+        const cards = this.props.deck.cards ? this.props.deck.cards : [];
         return (
             <View style={containerStyle}>
                 {this.props.editing &&
@@ -33,6 +33,7 @@ class DeckTitle extends React.Component {
                     <View style={styles.titleButton}>
                         <MaterialCommunityIcons name='cards-outline' size={40}/>
                         <Text style={{fontSize: 30}}>{this.props.deck.title}</Text>
+                        <Text style={{fontSize: 15}}>{cards.length} cards</Text>
                         <FontAwesome name='chevron-right' size={35}/>
                     </View>
                 </TouchableOpacity>
@@ -41,7 +42,7 @@ class DeckTitle extends React.Component {
     }
 }
 
-export default DeckTitle;
+export default DeckTitle
 
 const styles = StyleSheet.create({
     containerGrey: {
