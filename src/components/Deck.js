@@ -61,36 +61,37 @@ class Deck extends React.Component {
     }
 
     render() {
-        let card = this.props.deck.cards[this.state.cardIndex];
+        let card = this.props.cards[this.state.cardIndex];
         return !this.state.quizzing ?
             <View style={styles.container}>
                 <Text style={{fontSize: 22}}>{this.props.deck.title}</Text>
                 <TextButton onPress={this.handleCreateCard} style={styles.addCardButton}>
                     <FontAwesome name='plus' size={18}/> Add Card
                 </TextButton>
-                {this.props.deck.cards.length > 0 &&
+                {this.props.cards.length > 0 &&
                 <TextButton onPress={this.handleStartQuiz} style={styles.startQuizButton}>
                     <FontAwesome name='play' size={18}/> Start quiz
                 </TextButton>
                 }
             </View>
             :
-            <Card id={card.id}
+            <Card card={card}
                   handleAnswer={this.handleAnswer}
                   score={this.state.score}
-                  index={this.state.cardIndex}
-                  totalCards={this.props.deck.cards.length}/>
+                  index={this.state.cardIndex + 1}
+                  totalCards={this.props.cards.length}/>
     }
 }
 
-function mapStateToProps({decks, cards}, ownProps) {
+function mapStateToProps({decks}, ownProps) {
     const id = ownProps.navigation.state.params.id;
+    const deck =  _.filter(decks.decks, (deck) => {
+        return id === deck.id;
+    })[0];
     return {
         id: id,
-        deck: _.filter(decks.decks, (deck) => {
-            return id === deck.id;
-        })[0],
-        cards: _.shuffle(cards.cards)
+        deck:deck,
+        cards: _.shuffle(deck.cards)
     }
 }
 

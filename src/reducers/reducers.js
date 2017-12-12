@@ -30,33 +30,27 @@ function decks(state=initialState, action) {
                 ...state,
                 ['decks']: decks
             }
-        default:
-            return state;
-    }
-}
-
-function cards(state=initialState, action) {
-    switch (action.type) {
         case actions.ADD_CARD:
-            var cards = [...state['cards']];
-            cards.push(action.card);
+            let deck = [];
+            var decks = [...state['decks']];
+            decks = _.reject(decks, (d) => {
+                if (d.id === action.card.deckId) {
+                    deck = d;
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            deck['cards'].push(action.card);
+            decks.push(deck);
             return {
                 ...state,
-                ['cards']: cards
+                ['decks']: decks
             };
         case actions.GET_CARDS:
             return {
                 ...state,
                 ['cards']: action.cards
-            }
-        case actions.REMOVE_CARDS:
-            var cards = [...state['cards']];
-            cards = _.reject(cards, (card) => {
-                return card.deckId === action.deckId;
-            })
-            return {
-                ...state,
-                ['cards']: cards
             }
         default:
             return state;
@@ -64,6 +58,5 @@ function cards(state=initialState, action) {
 }
 
 export default combineReducers({
-    cards,
     decks
 });

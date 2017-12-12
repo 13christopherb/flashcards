@@ -70,26 +70,14 @@ class Card extends React.Component {
     }
 }
 
-function mapStateToProps({cards}, ownProps) {
-    const id = ownProps.id;
-    return {
-        id: id,
-        card: _.filter(cards.cards, (card) => {
-            return id === card.id;
-        })[0],
-        score: ownProps.score,
-        index: ownProps.index + 1,
-        totalCards: ownProps.totalCards
-    }
-}
-
 
 const styles = StyleSheet.create({
     card: {
         width: 300,
         height: 500,
         backgroundColor: 'powderblue',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        alignItems: 'center'
     },
     showAnswerButton: {
         backgroundColor: '#6f7fcd',
@@ -131,6 +119,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(
-    mapStateToProps,
-)(Card)
+export default Card;
