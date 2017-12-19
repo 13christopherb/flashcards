@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect({actions})(NewDeck)
+export default connect()(NewDeck)
