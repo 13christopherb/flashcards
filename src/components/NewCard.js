@@ -20,8 +20,17 @@ class NewCard extends React.Component {
             question: this.state.question,
             answer: this.state.answer
         };
-        this.props.dispatch(actions.postCard(card));
-        this.props.navigation.goBack();
+        if (this.validInputs()) {
+            this.props.dispatch(actions.postCard(card));
+            this.props.navigation.goBack();
+        } else {
+            alert('Please fill out all fields');
+        }
+
+    }
+
+    validInputs = () => {
+        return this.state.question.length > 0 && this.state.answer.length > 0;
     }
 
     render() {

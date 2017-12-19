@@ -6,6 +6,7 @@ import _ from 'underscore';
 import * as actions from '../actions/actions';
 import TextButton from './TextButton';
 import Card from './Card'
+import { setLocalNotification, clearLocalNotification} from "../utils/helpers";
 
 class Deck extends React.Component {
 
@@ -46,9 +47,12 @@ class Deck extends React.Component {
                 cardIndex: 0,
                 quizzing: false
             })
+            clearLocalNotification();
+            setLocalNotification();
             this.props.navigation.navigate('Result', {
                 score: score, title: this.props.deck.title,
-                parentScreenKey: this.props.navigation.state.key
+                parentScreenKey: this.props.navigation.state.key,
+                startQuiz: this.handleStartQuiz
             })
         }
     }
@@ -90,7 +94,7 @@ function mapStateToProps({decks}, ownProps) {
     })[0];
     return {
         id: id,
-        deck:deck,
+        deck: deck,
         cards: _.shuffle(deck.cards)
     }
 }

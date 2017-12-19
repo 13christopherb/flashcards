@@ -9,6 +9,7 @@ import Deck from './src/components/Deck';
 import NewCard from './src/components/NewCard';
 import Result from './src/components/Result';
 import reducer from './src/reducers/reducers';
+import { setLocalNotification } from "./src/utils/helpers";
 
 const store = createStore(
     reducer,
@@ -16,6 +17,10 @@ const store = createStore(
 )
 
 export default class App extends React.Component {
+
+    componentDidMount() {
+        setLocalNotification();
+    }
 
     render() {
         return (

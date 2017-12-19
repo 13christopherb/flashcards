@@ -5,6 +5,7 @@ import TextButton from './TextButton';
 
 
 export default function Result(props) {
+
     return (
         <View style={{
             flex: 1,
@@ -13,11 +14,13 @@ export default function Result(props) {
             alignItems: 'center'
         }}>
             <Text style={{fontSize: 20}}>Final Score: {props.navigation.state.params.score}</Text>
-            <TextButton onPress={() => props.navigation.goBack(props.navigation.state.params.parentScreenKey)}
+            <TextButton onPress={() => props.navigation.goBack()}
                         style={styles.finishedButton}>
                 <FontAwesome name="check" size={18} />  Finished
             </TextButton>
-            <TextButton onPress={() => props.navigation.goBack()}
+            <TextButton onPress={() => {
+                props.navigation.state.params.startQuiz();
+                props.navigation.goBack();}}
                         style={styles.retryButton}>
                 <FontAwesome name="refresh" size={18} />  Try Again
             </TextButton>

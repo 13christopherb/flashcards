@@ -4,7 +4,6 @@ import * as actions from '../actions/actions';
 
 const initialState = {
     decks: [],
-    cards: []
 }
 
 function decks(state=initialState, action) {
@@ -42,7 +41,7 @@ function decks(state=initialState, action) {
                 }
             });
             deck['cards'].push(action.card);
-            decks.push(deck);
+            decks.unshift(deck);
             return {
                 ...state,
                 ['decks']: decks
