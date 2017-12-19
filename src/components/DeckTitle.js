@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
-import _ from 'underscore';
+import { green, grey, lightGrey, white } from '../utils/colors';
 
 
 class DeckTitle extends React.Component {
@@ -50,21 +50,21 @@ const styles = StyleSheet.create({
         maxHeight: '33%',
         flexDirection: 'row',
         borderBottomWidth: 2.5,
-        borderColor: '#D3D3D3',
-        backgroundColor: '#DCDCDC'
+        borderColor: grey,
+        backgroundColor: lightGrey
     },
     containerWhite: {
         flex: 1,
         maxHeight: '33%',
         flexDirection: 'row',
         borderBottomWidth: 2.5,
-        borderColor: '#D3D3D3',
-        backgroundColor: '#FFFFFF',
+        borderColor: grey,
+        backgroundColor: white,
     },
     addCardButton: {
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         fontSize: 20,
-        color: '#ffffff',
+        color: white,
         borderRadius: 7,
         width: 20
     },

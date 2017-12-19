@@ -1,8 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
-import {connect} from 'react-redux';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import _ from 'underscore';
+import { green, blue, red, white } from '../utils/colors';
 import TextButton from "./TextButton";
 
 class Card extends React.Component {
@@ -80,10 +79,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     showAnswerButton: {
-        backgroundColor: '#6f7fcd',
+        backgroundColor: blue,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
@@ -91,10 +90,10 @@ const styles = StyleSheet.create({
         width: 170
     },
     correctButton: {
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
@@ -102,10 +101,10 @@ const styles = StyleSheet.create({
         width: 130
     },
     incorrectButton: {
-        backgroundColor: '#e60000',
+        backgroundColor: red,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,

@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {FontAwesome} from '@expo/vector-icons';
 import _ from 'underscore';
+import { green, blue, white } from '../utils/colors';
 import * as actions from '../actions/actions';
 import TextButton from './TextButton';
 import Card from './Card'
@@ -17,8 +18,7 @@ class Deck extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(actions.fetchDeck(this.props.id));
-        this.props.dispatch(actions.fetchCards(this.props.id));
+        this.props.fetchDeck(this.props.id);
     }
 
     handleCreateCard = () => {
@@ -106,17 +106,17 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     startQuizButton: {
-        backgroundColor: '#6f7fcd',
+        backgroundColor: blue,
         fontSize: 20,
-        color: '#ffffff',
+        color: white,
         borderRadius: 7,
         width: 140,
         marginBottom: '60%',
     },
     addCardButton: {
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         fontSize: 20,
-        color: '#ffffff',
+        color: white,
         borderRadius: 7,
         width: 140,
         marginTop: '60%'
@@ -126,4 +126,5 @@ const styles = StyleSheet.create({
 
 export default connect(
     mapStateToProps,
+    {fetchDeck: actions.fetchDeck}
 )(Deck)

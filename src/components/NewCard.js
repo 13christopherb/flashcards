@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux';
 import {FontAwesome} from '@expo/vector-icons';
 import uuidv4 from 'uuid';
+import { green, white } from '../utils/colors';
 import * as actions from '../actions/actions';
 import TextButton from './TextButton';
 
@@ -58,14 +59,14 @@ class NewCard extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: white,
     },
     addCardButton: {
         height: 35,
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         borderRadius: 5,
         fontSize: 20,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,

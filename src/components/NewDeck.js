@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 import * as actions from '../actions/actions';
 import uuidv4 from 'uuid';
+import { green, white } from '../utils/colors';
 import TextButton from './TextButton';
 
 class NewDeck extends React.Component {
@@ -47,14 +48,14 @@ class NewDeck extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: white,
     },
     addDeckButton: {
         height: 35,
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         borderRadius: 5,
         fontSize: 20,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
@@ -64,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(NewDeck)
+export default connect({actions})(NewDeck)

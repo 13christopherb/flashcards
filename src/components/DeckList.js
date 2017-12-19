@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native'
 import {connect} from 'react-redux';
 import {FontAwesome} from '@expo/vector-icons';
 import * as actions from '../actions/actions';
+import { green, darkBlue, white } from '../utils/colors';
 import DeckTitle from './DeckTitle';
 import TextButton from './TextButton';
 
@@ -13,7 +14,7 @@ class DeckList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(actions.fetchDecks());
+        this.props.fetchDecks();
     }
 
     createDeck = (e) => {
@@ -21,7 +22,7 @@ class DeckList extends React.Component {
     }
 
     deleteDeck = (deck) => {
-        this.props.dispatch(actions.deleteDeck(deck));
+        this.props.deleteDeck(deck);
         this.setState({
             editing: false
         })
@@ -85,10 +86,10 @@ class DeckList extends React.Component {
 
 const styles = StyleSheet.create({
     addDeckButton: {
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     editButton: {
         fontSize: 20,
         borderRadius: 5,
-        color: '#4169E1',
+        color: darkBlue,
     }
 });
 
@@ -110,4 +111,8 @@ function mapStateToProps({decks}) {
 
 export default connect(
     mapStateToProps,
+    {
+        fetchDecks: actions.fetchDecks,
+        deleteDeck: actions.deleteDeck
+    }
 )(DeckList)

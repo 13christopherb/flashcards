@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
+import { green, blue, white } from '../utils/colors';
 import TextButton from './TextButton';
 
 
@@ -30,10 +31,10 @@ export default function Result(props) {
 
 const styles = StyleSheet.create({
     finishedButton: {
-        backgroundColor: '#32CD32',
+        backgroundColor: green,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
@@ -41,10 +42,10 @@ const styles = StyleSheet.create({
         width: 130
     },
     retryButton: {
-        backgroundColor: '#6f7fcd',
+        backgroundColor: blue,
         fontSize: 20,
         borderRadius: 5,
-        color: '#ffffff',
+        color: white,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 5,
