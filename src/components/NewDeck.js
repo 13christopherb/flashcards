@@ -45,7 +45,6 @@ class NewDeck extends React.Component {
     }
 }
 
-function mapStateToProps({decks}, ownProps) {}
 
 const styles = StyleSheet.create({
     container: {
@@ -68,6 +67,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-    mapStateToProps,
+    null,
     {postDeck: actions.postDeck}
 )(NewDeck)
