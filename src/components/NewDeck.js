@@ -20,8 +20,8 @@ class NewDeck extends React.Component {
             cards: []
         };
         if (this.validateInputs()) {
-            this.props.dispatch(actions.postDeck(deck));
-            this.props.navigation.goBack();
+            this.props.postDeck(deck);
+            this.props.navigation.navigate('Deck', {id: deck.id})
         }
     }
 
@@ -45,6 +45,8 @@ class NewDeck extends React.Component {
     }
 }
 
+function mapStateToProps({decks}, ownProps) {}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -65,4 +67,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(NewDeck)
+export default connect(
+    mapStateToProps,
+    {postDeck: actions.postDeck}
+)(NewDeck)

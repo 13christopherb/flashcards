@@ -17,7 +17,8 @@ class Deck extends React.Component {
         score: 0,
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        console.log('test');
         this.props.fetchDeck(this.props.id);
     }
 
@@ -69,6 +70,12 @@ class Deck extends React.Component {
         return !this.state.quizzing ?
             <View style={styles.container}>
                 <Text style={{fontSize: 22}}>{this.props.deck.title}</Text>
+                <Text style={{fontSize:18}}>
+                    {this.props.cards.length}
+                    {this.props.cards.length === 0 || this.props.cards.length > 1 ?
+                        <Text> cards</Text> : <Text> card</Text>
+                    }
+                </Text>
                 <TextButton onPress={this.handleCreateCard} style={styles.addCardButton}>
                     <FontAwesome name='plus' size={18}/> Add Card
                 </TextButton>
@@ -89,9 +96,12 @@ class Deck extends React.Component {
 
 function mapStateToProps({decks}, ownProps) {
     const id = ownProps.navigation.state.params.id;
-    const deck =  _.filter(decks.decks, (deck) => {
+    let deck =  _.filter(decks.decks, (deck) => {
         return id === deck.id;
     })[0];
+    if (! deck) {
+        deck = {}
+    }
     return {
         id: id,
         deck: deck,

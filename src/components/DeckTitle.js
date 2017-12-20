@@ -10,7 +10,7 @@ class DeckTitle extends React.Component {
         editing: false
     }
 
-    handlePress =() => {
+    handlePress = () => {
         this.props.selectDeck(this.props.deck);
     }
 
@@ -33,7 +33,11 @@ class DeckTitle extends React.Component {
                     <View style={styles.titleButton}>
                         <MaterialCommunityIcons name='cards-outline' size={40}/>
                         <Text style={{fontSize: 30}}>{this.props.deck.title}</Text>
-                        <Text style={{fontSize: 15}}>{cards.length} cards</Text>
+                        <Text style={{fontSize: 15}}>
+                            {cards.length} {cards.length === 0 || cards.length > 1 ?
+                                <Text>cards </Text> : <Text>card </Text>
+                            }
+                        </Text>
                         <FontAwesome name='chevron-right' size={35}/>
                     </View>
                 </TouchableOpacity>

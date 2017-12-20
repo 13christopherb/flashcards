@@ -103,11 +103,7 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({decks}) {
-    return {
-        decks: decks.decks
-    }
-}
+const mapStateToProps = ({ decks: { decks } }) => ({ decks });
 
 export default connect(
     mapStateToProps,
